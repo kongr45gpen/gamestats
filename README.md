@@ -49,16 +49,6 @@ on linux).
 Misc
 =====
 
-ToDos
------
-* DateTime fixes (everything server side should be GMT - Quol is working on it..)
-
-Feature Requests
------
-* Pagination where it makes sense
-* Translations/preferences to show preferred language
-* Bzflag authentication (Quol is working on it..porting it over from previous work..)
-
 Reasons why a larger framework wasn't selected
 -----
 * Wanted clean IP
