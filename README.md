@@ -8,6 +8,47 @@ components can be easily snapped in, and used. For more info, please see the doc
 BzStats itself is in the early stages, and will get better with time. 
 If you have any recommendations, please see Quol on #bzflag on IRC (Freenode).
 
+Installation
+=====
+
+Stats collector
+-----
+First of all, you need to get your hands on the BZFlag stats collector, which can be cloned using SVN:
+
+    svn co svn://svn.code.sf.net/p/bzflag/code/trunk/tools/BZStatCollector
+	
+Then, you need to compile the CollectorCLI sources. If you are on Windows, you should open the solution file
+(CollectorCLI.sln) using Visual C# (any version should work). If you are on Linux or any Unix-based operating system,
+install monodevelop and run the following commands on the CollectorCLI directory:
+
+    ln -s ../DatabaseStore/MySql.Data.dll .
+	gmcs -r:MySql.Data.dll Program.cs ../Connector/BZConnect.cs ../Connector/BZFSList.cs ../Connector/StatRecords.cs ../DatabaseStore/DBStore.cs
+
+These should get you a working Program.exe executable.
+
+Database
+-----
+Using your favourite MySql database administration tool (such as PhpMyAdmin), create the database where all the data
+is going to be stored. You should create the table structure using the schemas provided on the schema/database.sql
+file of BZStatCollector and the config/db/sessions-mysql.sql file on this repository.
+
+Configuration
+-----
+There are 2 configuration files which you need to change: The first one is CollectorCLI/config.xml of BZStatCollector,
+which should contain the details of the database you just created (don't forget to properly close the XML
+tags - e.g: `<Database \>` should become `<Database>bzstats</Database>`). The second is config.example.php,
+which you should copy under the name config.php, and update so it contains the details of the same database (both
+on `$cfg['db']['default']` and `$cfg['db']['sessions']`).
+
+Running
+-----
+You should configure your web server using the configuration samples for both Apache and Nginx provided on [README-BZSTATS](README-BZSTATS).
+You should also keep BZStatCollector's Program.exe open at all times (it's possible to use `nohup ./Program.exe &` to do this
+on linux).
+
+Misc
+=====
+
 ToDos
 -----
 * DateTime fixes (everything server side should be GMT - Quol is working on it..)
