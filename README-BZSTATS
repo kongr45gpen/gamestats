@@ -1,6 +1,6 @@
 Please note that as some player names have slashes in them, that Apache by default blocks the encoding of slashes.
 
-to work around this, we enable `AllowEncodedSlashes On` at the virtual directory level.
+To work around this, we enable `AllowEncodedSlashes On` at the virtual directory level.
 
 The application encodes them just fine, and will route them just fine, and there is no security issue with them - so it's safe to enable them
 
@@ -51,3 +51,33 @@ alias /myAlias "/path/to/project/webroot"
         RewriteRule ^(.*)$ index.php?url=$1 [PT,L]
     </IfModule>
 </Location>
+
+
+Here's a sample configuration file for nginx:
+
+server {
+  listen 0.0.0.0:80;
+  server_name stats.domain.com;
+  root /path/to/project/webroot;
+
+  access_log  /var/log/nginx/gamestats_access.log;
+  error_log   /var/log/nginx/gamestats_error.log;
+
+  location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico)$ {
+    access_log        off;
+    expires           30d;
+  }
+
+  location / {
+    fastcgi_pass   127.0.0.1:9000;
+    fastcgi_index  index.php;
+    include        /usr/local/nginx/conf/fastcgi.conf;
+
+    index  index.html index.htm index.php;
+
+    if (!-e $request_filename){
+      rewrite ^(.*)$ /index.php?url=$1
+      break;
+    }
+  }
+}
