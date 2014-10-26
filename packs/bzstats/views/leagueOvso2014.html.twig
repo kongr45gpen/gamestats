@@ -22,12 +22,14 @@
                         <thead class="subHeader">
                             <tr>
                                 <th>Player Name</th>
+                                <th>Team Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for name in players %}
+                            {% for name, player in players %}
                                 <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
                                     <td><a href="/bzstats/player/{{name|url_encode()}}">{{ name }}</a></td>
+                                    <td>{% if player.team %}Team {{ player.team }}</td>{% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
