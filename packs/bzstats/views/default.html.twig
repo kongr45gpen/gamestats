@@ -14,17 +14,18 @@
                 <li class="left"><a href="/" class="{% block HomeCurrent %}{% endblock %}">Home</a></li>
                 <li class="left"><a href="/bzstats/servers" class="{% block ServerCurrent %}{% endblock %}">Servers</a></li>
                 <li class="left"><a href="/bzstats/players" class="{% block PlayersCurrent %}{% endblock %}">Players</a></li>
+                <li class="left"><a href="/league/ovso2014" class="{% block LeagueCurrent %}{% endblock %}">1vs1 Tourney 2014</a></li>
                 <li class="right"><a href="/AboutBzStats" class="{% block AboutCurrent %}{% endblock %}">About</a></li>
             </ul>
         </div>
-        
+
         {% block replaceContent %}
         <div id='content'>
             {% block contentTop %}{% endblock %}
             <div id='content-inner'>
                 {% block content %}{% endblock %}
             </div>
-                
+
             <div id='graphArea'>
                 {% block graphArea %}{% endblock %}
             </div>
@@ -34,7 +35,7 @@
             </div>
         </div>
         {% endblock %}
-            
+
         <div id='footer'>
             {% block footer %}
             {% endblock %}

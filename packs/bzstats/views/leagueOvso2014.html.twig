@@ -1,0 +1,40 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}1vs1 Contest 2014{% endblock %}
+{% block LeagueCurrent %}selected{% endblock %}
+
+{% block contentTop %}
+<h1>1vs1 League Tourney (2014)</h1>
+{% endblock %}
+
+{% block content %}
+<table id='stats'>
+    <thead>
+        <tr>
+            <th id="th1">1vs1 Contest Players <span class="small info">(total: {{players|length}})</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="largescroll">
+                    <table class="serversUsed">
+                        <thead class="subHeader">
+                            <tr>
+                                <th>Player Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for name in players %}
+                                <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
+                                    <td><a href="/gamestats/bzstats/player/{{name|url_encode()}}">{{ name }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
