@@ -27,7 +27,7 @@
                         <tbody>
                             {% for name in players %}
                                 <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
-                                    <td><a href="/gamestats/bzstats/player/{{name|url_encode()}}">{{ name }}</a></td>
+                                    <td><a href="/bzstats/player/{{name|url_encode()}}">{{ name }}</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>
