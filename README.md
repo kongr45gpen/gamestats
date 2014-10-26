@@ -22,7 +22,7 @@ Then, you need to compile the CollectorCLI sources. If you are on Windows, you s
 install monodevelop and run the following commands on the CollectorCLI directory:
 
     ln -s ../DatabaseStore/MySql.Data.dll .
-	gmcs -r:MySql.Data.dll Program.cs ../Connector/BZConnect.cs ../Connector/BZFSList.cs ../Connector/StatRecords.cs ../DatabaseStore/DBStore.cs
+    gmcs -r:"System.Data" -r:MySql.Data.dll Program.cs ../Connector/BZConnect.cs ../Connector/BZFSList.cs ../Connector/StatRecords.cs ../DatabaseStore/DBStore.cs
 
 These should get you a working Program.exe executable.
 
