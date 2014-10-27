@@ -23,6 +23,7 @@
                             <tr>
                                 <th>Player Name</th>
                                 <th>Team Name</th>
+                                <th>Current servers</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,6 +31,11 @@
                                 <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
                                     <td><a href="bzstats/player/{{name|url_encode()}}">{{ name }}</a></td>
                                     <td>{% if player.team %}Team {{ player.team }}</td>{% endif %}
+                                    <td>{% for server in player.servers -%}
+                                        <a href="bzstats/server/{{ server.name }}">{{ server.name }}</a>{% if not loop.last %}, {% endif -%}
+                                    {%- else -%}
+                                        <em>Offline</em>
+                                    {%- endfor -%}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
