@@ -2,17 +2,17 @@
 /**
  * router/dispatcher for the Qore Framework
  * Copyright (C) 2012  Ian Farr
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -36,12 +36,12 @@ class Router {
     private $controllerPath;
     private $queryData;
     private $postData;
-    
+
     /**
      * @var \Qore\Basecontroller
      */
     private $controller;
-    
+
     public function __construct($uri, $defaultController, $defaultMethod, array $args = array()) {
         //assign the current URL
         if (SITE_SUBDIR == '') {
@@ -50,13 +50,13 @@ class Router {
             //if we are in a subdir - we strip that from the URL, so we don't think that it is the controller
             $this->url = str_replace(SITE_SUBDIR, '', strtolower($uri));
         }
-        
+
         //initialize the routes array
         $this->routes = array();
-        
+
         //initializet the default controller path
         $this->controllerPath = array();
-        
+
         //initialize the default route
         $this->defaultController = $defaultController;
         $this->defaultMethod = $defaultMethod;
@@ -65,7 +65,7 @@ class Router {
         //init other vars
         $this->queryData = array();
         $this->postData = array();
-        
+
         //create the default controller path
         foreach ($GLOBALS['cfg']['packs'] as $pack) {
             $controllerDir = ROOT . DS . 'packs' . DS . strtolower($pack) . DS . 'controllers';
@@ -74,12 +74,12 @@ class Router {
             }
         }
     }
-    
-    
+
+
     /**
      * Private Method for getting the full path of a controller
      * This will return the first matched controller from the controllerPath
-     * 
+     *
      * @param string $controllerName
      * @return string valid path for a potential controller
      */
@@ -91,22 +91,22 @@ class Router {
         }
         return false;
     }
-    
+
     /**
-     * Private Method for getting the full class name of a given controller 
-     * 
+     * Private Method for getting the full class name of a given controller
+     *
      * @param string $controllerName
      * @return string the class name for a potential conroller
      */
     private function getClassName($controllerName) {
         return ucfirst($controllerName) . 'Controller';
     }
-    
+
     /***
      * Private method to clean the urlArray()
-     * 
+     *
      * remove blank elements and get rid of other nasties in the URL
-     * 
+     *
      * @param bool $doMatch if we should do the preg_match to check for valid characters in the URL
      *                      default is true.
      */
@@ -115,7 +115,7 @@ class Router {
         //iterate throught he array
         foreach ($array as $key => $val) {
             //remove empty elements
-            if ($val == '') { 
+            if ($val == '') {
                 unset($array[$key]);
                 $removedEntries = true;
             } else {
@@ -134,27 +134,27 @@ class Router {
             $array = array_values($array);
         }
     }
-    
+
     /**
      * Private method that will prepare and initiate a clean on the URL array
      */
     private function prepareUrlArray() {
         //strip the leading / off the URL - we don't need that for the urlArray
         $path = substr($this->url, 1);
-        
+
         //remove any double slashes - this causes all sorts of weirdness..
-       
+
         //parse the URL into an array, splitting by '/'
         $this->urlArray = explode('/' , $path);
-        
+
         //make sure all the URL elements are clean (no empty elements or other nasties)
         $this->cleanUrlArray($this->urlArray);
     }
-    
+
     /**
      * Private Method compares the current URL with predefined matches
      * Tries to see which pre-configured controller::method should be chosen for a given URL
-     * 
+     *
      * @return boolean True on match found, False on no match found
      */
     private function matchRoutes() {
@@ -178,12 +178,12 @@ class Router {
                 } else {
                     //strip the matched URL portion off of the URL
                     $chopUrl = str_replace(strtolower($route['path']), "", $this->url);
-                    
+
                     //convert it to an array
                     //parse the URL into an array, splitting by '/' and make sure it's cleaned
                     $this->urlArray = explode('/' , $chopUrl);
                     $this->cleanUrlArray($this->urlArray);
-                    
+
                     //set that as the $args
                     $this->requestedArgs = $this->urlArray;
                 }
@@ -192,21 +192,21 @@ class Router {
         }
         return false;
     }
-    
+
     /**
      * Private Function which hands this request over to the proper controller::method
      * or throws on error if no valid controller:match is found for this reuqest.
-     * 
+     *
      * @param boolean $match
-     * @throws Exception on no controller::method match found for given URL 
+     * @throws Exception on no controller::method match found for given URL
      */
     private function processController($match) {
         $controllerFile = $this->getControllerPath($this->requestedController);
-        
+
         if ($controllerFile !== false) {
             //load the controller php file
             require($controllerFile);
-            
+
             //check to see if the correct class exists
             $class = $this->getClassName($this->requestedController);
             if (class_exists($class, false)) {
@@ -228,10 +228,10 @@ class Router {
                         if (method_exists($this->controller, $publicMethod)) {
                             //shift the array over to get at the args
                             array_shift($this->urlArray);
-                            
+
                             //assign the args
                             $this->requestedArgs = $this->urlArray;
-                            
+
                             //execute the method - pass args
                             $this->callController($publicMethod);
                         } else {
@@ -265,17 +265,17 @@ class Router {
             throw new \Qore\Qexception("Unable to find the '$this->requestedController' controller!", \Qore\Qexception::$NotFound);
         }
     }
-    
+
     /**
      * Calls all the appropriate controller methods for the requested controller
      * this function should only ever be called after validating that the controller and method exist
-     * 
+     *
      * @param BaseController $this->controller
-     * @param string $method 
+     * @param string $method
      */
     private function callController($method) {
         $queryDetected = false;
-        
+
         //the urlArray contains arguments (or nothing) at this point
         //so loop through it - see if we have any request qureies (?key=val..)
         if ($this->urlArray) {
@@ -308,7 +308,7 @@ class Router {
                 }
             }
         }
-        
+
         //if we have found queries..
         if ($queryDetected) {
             //clean the urlArray again (but don't look for regex - we already did that...
@@ -320,7 +320,7 @@ class Router {
             //re-assign $this->requestedArgs
             $this->requestedArgs = $this->urlArray;
         }
-        
+
         //Check to see if we have any post data..
         if ($_POST) {
             //clean the post array...
@@ -329,7 +329,7 @@ class Router {
             $this->controller->setHttpPost(true);
             $this->controller->setHttpPostData($_POST);
         }
-        
+
         //execute the pre methods for the requested controller/method
         $this->controller->__pre();
 
@@ -338,12 +338,12 @@ class Router {
         if (method_exists($this->controller, $preMethod)) {
             $this->controller->$preMethod($this->requestedArgs);
         }
-        
+
         //see if we are allowed to execute the method
         if ($this->controller->getExecutionState()) {
             //we are alowed, call it
             $this->controller->$method($this->requestedArgs);
-            
+
             //see if the there is a post method for the requested method, and call it
             $postMethod = $method . '_post';
             if (method_exists($this->controller, $postMethod)) {
@@ -356,10 +356,10 @@ class Router {
             throw new \Qore\Qexception("you do not have permissions to execute this page", \Qore\Qexception::$Unauthorized);
         }
     }
-    
+
     /**
      * Public method to register a pre-configured URL -> controller::method mapping
-     * 
+     *
      * @param bool $forceArgs   true/false, should we use the provided $args (and ignore the ones in the URL) or not
      * @param string $url_path the relative URL to match against (ex: /news)
      * @param string $controllerName the controller to use for the $web_path url.
@@ -369,17 +369,17 @@ class Router {
     public function registerRoute($forceArgs, $url_path, $controllerName, $method, array $args = array()) {
         $this->routes[] = array('forceArgs' => $forceArgs, 'path' => $url_path, 'controller' => $controllerName, 'method' => $method, 'args' => $args);
     }
-    
+
     /**
      * Public method to push a new controller search location into the controllerPath array.
-     * @param type $path 
+     * @param type $path
      */
     public function registerControllerPath($path) {
         $this->controllerPath[] = $path;
     }
-    
+
     /**
-     * Public method which processes the routes, and figures out which controller::method to use for this request 
+     * Public method which processes the routes, and figures out which controller::method to use for this request
      */
     public function route() {
         //see if the current URL matches a route rule
@@ -388,7 +388,7 @@ class Router {
         } else {
             //no route rule found...prep the URL array for processing
             $this->prepareUrlArray();
-            
+
             //assign the requested controller
             $this->requestedController = $this->urlArray[0];
 

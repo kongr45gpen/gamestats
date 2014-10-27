@@ -36,6 +36,7 @@ Interface iDbStats {
    public function getPlayerMostLossDetails($playerName, $tz);
    public function getPlayerMostTKDetails($playerName, $tz);
    public function getPlayerFavoriteServers($playerName);
+   public function getPlayerCurrentServers($playerName, $startDate, $endDate);
    public function getPlayerActiveTimes($playerName, $startDate, $endDate, $tz);
    public function getPlayerScores($playerName, $startDate, $endDate, $tz);
    public function findPlayer($playerName);
