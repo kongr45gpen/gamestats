@@ -22,7 +22,7 @@
         <tr><td><div class="largescroll"><table>
         {% for row in data['players'] %}
         <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
-            <td><a class="dataTop" href="/bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a></td>
+            <td><a class="dataTop" href="bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a></td>
         </tr>
         {% endfor %}
         </table></div></td></tr>

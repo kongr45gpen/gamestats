@@ -12,17 +12,17 @@
 
 {% block jsfooter %}
     {{ parent() }}
-    {{ graph.dyjs('first','/bzstatsapi/csv/getTotalPlayerCount','BZFlag Total Player Activity','Number Active Players', 'false') }}
-    {{ graph.dyjs('second','/bzstatsapi/csv/getTotalServerCount','BZFlag Total Server Activity','Number Active Servers', 'false', 'false') }}
+    {{ graph.dyjs('first','bzstatsapi/csv/getTotalPlayerCount','BZFlag Total Player Activity','Number Active Players', 'false') }}
+    {{ graph.dyjs('second','bzstatsapi/csv/getTotalServerCount','BZFlag Total Server Activity','Number Active Servers', 'false', 'false') }}
 {% endblock %}
-    
+
 {% block graphArea %}
     <center>
     <table class="graphs">
         <tbody>
             <tr>
-                <td>{{ g.ghtml("first", '/bzstatsapi/csv/getTotalPlayerCount', '540px', '300px') }}</td>
-                <td>{{ g.ghtml("second", '/bzstatsapi/csv/getTotalServerCount', '540px', '300px') }}</td>
+                <td>{{ g.ghtml("first", 'bzstatsapi/csv/getTotalPlayerCount', '540px', '300px') }}</td>
+                <td>{{ g.ghtml("second", 'bzstatsapi/csv/getTotalServerCount', '540px', '300px') }}</td>
             </tr>
         </tbody>
     </table>
@@ -83,7 +83,7 @@
                         </thead>
                         <tbody>
                             {% for row in data['curServerList'] %}
-                                <tr class="{{ cycle(['even', 'odd'], loop.index) }}"><td><a href="/bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td><td>{{row.Players}}</td><td>{{row.Observers}}</td></tr>
+                                <tr class="{{ cycle(['even', 'odd'], loop.index) }}"><td><a href="bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td><td>{{row.Players}}</td><td>{{row.Observers}}</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -101,7 +101,7 @@
                         </thead>
                         <tbody>
                             {% for row in data['dailyServerList'] %}
-                                <tr class="{{ cycle(['even', 'odd'], loop.index) }}"><td><a href="/bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td><td>{{row.Players}}</td><td>{{row.Observers}}</td></tr>
+                                <tr class="{{ cycle(['even', 'odd'], loop.index) }}"><td><a href="bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td><td>{{row.Players}}</td><td>{{row.Observers}}</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -119,7 +119,7 @@
                         </thead>
                         <tbody>
                             {% for row in data['weeklyServerList'] %}
-                                <tr class="{{ cycle(['even', 'odd'], loop.index) }}"><td><a href="/bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td><td>{{row.Players}}</td><td>{{row.Observers}}</td></tr>
+                                <tr class="{{ cycle(['even', 'odd'], loop.index) }}"><td><a href="bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td><td>{{row.Players}}</td><td>{{row.Observers}}</td></tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -142,7 +142,7 @@
                     <td>LastUpdate</td>
                 </tr>
                 {% for row in data['serverList'] %}
-                    <tr class="{{cycle(['even', 'odd'], loop.index)}}"><td><a href="/bzstats/server/{{row['ServerName']}}">{{row['ServerName']}}</a></td><td>{{row['Description']}}</td><td>{{row['LastUpdate']}}</td></tr>
+                    <tr class="{{cycle(['even', 'odd'], loop.index)}}"><td><a href="bzstats/server/{{row['ServerName']}}">{{row['ServerName']}}</a></td><td>{{row['Description']}}</td><td>{{row['LastUpdate']}}</td></tr>
                 {% endfor %}
             </tbody>
         </table>

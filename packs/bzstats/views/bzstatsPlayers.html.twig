@@ -9,31 +9,31 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{constant('SITE_ROOT')}}/css/dygraph.css" />
 {% endblock %}
-    
+
 {% block jsfooter %}
     {{ parent() }}
-    {{ graph.dyjs('first','/bzstatsapi/csv/getsumedplayercount','BZFlag Total Player Activity','Number Active Players/Observers', 'false') }}
+    {{ graph.dyjs('first','bzstatsapi/csv/getsumedplayercount','BZFlag Total Player Activity','Number Active Players/Observers', 'false') }}
 {% endblock %}
-    
+
 {% block graphArea %}
     <center>
     <table class="graphs">
         <tbody>
             <tr>
-                <td>{{ g.ghtml("first", '/bzstatsapi/csv/getsumedplayercount', '1110px', '400px') }}</td>
+                <td>{{ g.ghtml("first", 'bzstatsapi/csv/getsumedplayercount', '1110px', '400px') }}</td>
             </tr>
         </tbody>
     </table>
     </center>
 {% endblock %}
-    
-    
+
+
 {% block contentTop %}
 <form name="input" action="/bzstats/playersearch/" method="post">
     Player Search: <input type="text" name="PlayerSearch" />
     <input type="submit" value="Search" />
 </form>
-    
+
 {% if data.error.playernotfound %}
     <div class="error">
         The Player You Searched For Could Not be Found!<br />
@@ -68,7 +68,7 @@
                         <tbody>
                             {% for row in data['curPlayers'] %}
                                 <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
-                                    <td><a href="/bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a></td>
+                                    <td><a href="bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a></td>
                                     <td>{{row.ServerName}}</td>
                                     <td>{{row.Team}}</td>
                                     <td>{{row.Wins}}</td>
