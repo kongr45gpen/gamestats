@@ -9,23 +9,23 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{constant('SITE_ROOT')}}/css/dygraph.css" />
 {% endblock %}
-    
+
 {% block jsfooter %}
     {{ parent() }}
-    {{ graph.dyjs('first',"/bzstatsapi/csv/getPlayerActiveTimes/" ~ data['PlayerNameEncoded'],data['PlayerName']|title ~ "'s Activity",'Player Online State', 'false') }}
-    {{ graph.dyjs('second',"/bzstatsapi/csv/getPlayerScores/" ~ data['PlayerNameEncoded'],data['PlayerName']|title ~ "'s Scores",'Player Scores', 'false', 'false') }}
+    {{ graph.dyjs('first',"bzstatsapi/csv/getPlayerActiveTimes/" ~ data['PlayerNameEncoded'],data['PlayerName']|title ~ "'s Activity",'Player Online State', 'false') }}
+    {{ graph.dyjs('second',"bzstatsapi/csv/getPlayerScores/" ~ data['PlayerNameEncoded'],data['PlayerName']|title ~ "'s Scores",'Player Scores', 'false', 'false') }}
 {% endblock %}
-    
+
 {% block graphArea %}
 <center>
     <table class="graphs">
         <tbody>
             <tr>
                 <td>
-                    {{ g.ghtml("first", "/bzstatsapi/csv/getPlayerActiveTimes/" ~ data['PlayerNameEncoded'], '540px', '300px') }}
+                    {{ g.ghtml("first", "bzstatsapi/csv/getPlayerActiveTimes/" ~ data['PlayerNameEncoded'], '540px', '300px') }}
                 </td>
                 <td>
-                    {{ g.ghtml("second", "/bzstatsapi/csv/getPlayerScores/" ~ data['PlayerNameEncoded'], '540px', '300px') }}
+                    {{ g.ghtml("second", "bzstatsapi/csv/getPlayerScores/" ~ data['PlayerNameEncoded'], '540px', '300px') }}
                 </td>
              </tr>
         </tbody>
@@ -35,7 +35,7 @@
 
 {% block contentTop %}
 <h1>Players Statistics</h1>
-<a href="/bzstats/players"><- Back To Players</a>
+<a href="bzstats/players"><- Back To Players</a>
 {% endblock %}
 
 {% block content %}
@@ -57,16 +57,16 @@
                     <tr class="tRowLast">
                         <td>
                             Most Recently Seen On: <span class="data">{{ data['PlayerLastSeen']['Timestamp'] }}</span><br />
-                            Server: <span class="data"><a class="data" href="/bzstats/server/{{data['PlayerLastSeen']['ServerName']}}">{{ data['PlayerLastSeen']['ServerName'] }}</a></span><br />
+                            Server: <span class="data"><a class="data" href="bzstats/server/{{data['PlayerLastSeen']['ServerName']}}">{{ data['PlayerLastSeen']['ServerName'] }}</a></span><br />
                             Team: <span class="data">{{ data['PlayerLastSeen']['Team'] }}</span><br />
                             <br />
                             First Ever Seen On: <span class="data">{{ data['PlayerFirstSeen']['Timestamp'] }}</span><br />
-                            Server: <span class="data"><a class="data" href="/bzstats/server/{{data['PlayerFirstSeen']['ServerName']}}">{{ data['PlayerFirstSeen']['ServerName'] }}</a></span><br />
+                            Server: <span class="data"><a class="data" href="bzstats/server/{{data['PlayerFirstSeen']['ServerName']}}">{{ data['PlayerFirstSeen']['ServerName'] }}</a></span><br />
                             Team: <span class="data">{{ data['PlayerFirstSeen']['Team'] }}</span><br />
                         </td>
                         <td>
                             Best Ever Ratio: <span class="data">{{ data['PlayerBestRatio']['Ratio'] }}</span><br />
-                            Server: <span class="data"><a class="data" href="/bzstats/server/{{data['PlayerBestRatio']['ServerName']}}">{{ data['PlayerBestRatio']['ServerName'] }}</a></span><br />
+                            Server: <span class="data"><a class="data" href="bzstats/server/{{data['PlayerBestRatio']['ServerName']}}">{{ data['PlayerBestRatio']['ServerName'] }}</a></span><br />
                             Team: <span class="data">{{ data['PlayerBestRatio']['Team'] }}</span><br />
                             Wins: <span class="data">{{ data['PlayerBestRatio']['Wins'] }}</span><br />
                             Losses: <span class="data">{{ data['PlayerBestRatio']['Losses'] }}</span><br />
@@ -75,7 +75,7 @@
                         </td>
                         <td>
                             Worst Ever Ratio: <span class="data">{{ data['PlayerWorstRatio']['Ratio'] }}</span><br />
-                            Server: <span class="data"><a class="data" href="/bzstats/server/{{data['PlayerWorstRatio']['ServerName']}}">{{ data['PlayerWorstRatio']['ServerName'] }}</a></span><br />
+                            Server: <span class="data"><a class="data" href="bzstats/server/{{data['PlayerWorstRatio']['ServerName']}}">{{ data['PlayerWorstRatio']['ServerName'] }}</a></span><br />
                             Team: <span class="data">{{ data['PlayerWorstRatio']['Team'] }}</span><br />
                             Wins: <span class="data">{{ data['PlayerWorstRatio']['Wins'] }}</span><br />
                             Losses: <span class="data">{{ data['PlayerWorstRatio']['Losses'] }}</span><br />
@@ -91,7 +91,7 @@
                     <tr class="tRowLast">
                         <td>
                             Timestamp: <span class="data">{{ data['PlayerMostWins']['Timestamp'] }}</span><br />
-                            Server: <span class="data"><a class="data" href="/bzstats/server/{{data['PlayerMostWins']['ServerName']}}">{{ data['PlayerMostWins']['ServerName'] }}</a></span><br />
+                            Server: <span class="data"><a class="data" href="bzstats/server/{{data['PlayerMostWins']['ServerName']}}">{{ data['PlayerMostWins']['ServerName'] }}</a></span><br />
                             Team: <span class="data">{{ data['PlayerMostWins']['Team'] }}</span><br />
                             Wins: <span class="data">{{ data['PlayerMostWins']['Wins'] }}</span><br />
                             Losses: <span class="data">{{ data['PlayerMostWins']['Losses'] }}</span><br />
@@ -99,7 +99,7 @@
                         </td>
                         <td>
                             Timestamp: <span class="data">{{ data['PlayerMostLosses']['Timestamp'] }}</span><br />
-                            Server: <span class="data"><a class="data" href="/bzstats/server/{{data['PlayerMostLosses']['ServerName']}}">{{ data['PlayerMostLosses']['ServerName'] }}</a></span><br />
+                            Server: <span class="data"><a class="data" href="bzstats/server/{{data['PlayerMostLosses']['ServerName']}}">{{ data['PlayerMostLosses']['ServerName'] }}</a></span><br />
                             Team: <span class="data">{{ data['PlayerMostLosses']['Team'] }}</span><br />
                             Wins: <span class="data">{{ data['PlayerMostLosses']['Wins'] }}</span><br />
                             Losses: <span class="data">{{ data['PlayerMostLosses']['Losses'] }}</span><br />
@@ -107,7 +107,7 @@
                         </td>
                         <td>
                             Timestamp: <span class="data">{{ data['PlayerMostTK']['Timestamp'] }}</span><br />
-                            Server: <span class="data"><a class="data" href="/bzstats/server/{{data['PlayerMostTK']['ServerName']}}">{{ data['PlayerMostTK']['ServerName'] }}</a></span><br />
+                            Server: <span class="data"><a class="data" href="bzstats/server/{{data['PlayerMostTK']['ServerName']}}">{{ data['PlayerMostTK']['ServerName'] }}</a></span><br />
                             Team: <span class="data">{{ data['PlayerMostTK']['Team'] }}</span><br />
                             Wins: <span class="data">{{ data['PlayerMostTK']['Wins'] }}</span><br />
                             Losses: <span class="data">{{ data['PlayerMostTK']['Losses'] }}</span><br />
@@ -134,7 +134,7 @@
                     </tr>
                     {% for row in data['PlayerFavServers'] %}
                     <tr class="{{ cycle(['even', 'odd'], loop.index) }}">
-                        <td><a class="dataTop" href="/bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td>
+                        <td><a class="dataTop" href="bzstats/server/{{row['ServerName']}}">{{ row.ServerName }}</a></td>
                         <td>{{row.TimesPlayed}}</td>
                     </tr>
                     {% endfor %}

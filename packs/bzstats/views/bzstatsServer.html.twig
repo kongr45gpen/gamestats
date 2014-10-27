@@ -9,21 +9,21 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{constant('SITE_ROOT')}}/css/dygraph.css" />
 {% endblock %}
-    
+
 {% block jsfooter %}
     {{ parent() }}
-    {{ graph.dyjs('serverGraph',"/bzstatsapi/csv/getserverstats/" ~ data['server'],data['server'] ~ ' Activity','Number Players/Observers', 'true') }}
+    {{ graph.dyjs('serverGraph',"bzstatsapi/csv/getserverstats/" ~ data['server'],data['server'] ~ ' Activity','Number Players/Observers', 'true') }}
 {% endblock %}
-    
+
 {% block graphArea %}
-  {{ g.ghtml("serverGraph", "/bzstatsapi/csv/getserverstats/" ~ data['server'], '1110px', '400px') }}
+  {{ g.ghtml("serverGraph", "bzstatsapi/csv/getserverstats/" ~ data['server'], '1110px', '400px') }}
 {% endblock %}
-    
+
 {% block contentTop %}
     <h1>{{data['server']|title}} Statistics</h1>
-    <a href="/bzstats/servers"><- Back To Servers</a>
+    <a href="bzstats/servers"><- Back To Servers</a>
 {% endblock %}
-    
+
 {% block content %}
 <table id='details'>
     <tbody>
@@ -49,7 +49,7 @@
         </tr>
     </tbody>
 </table>
-    
+
 <table id='stats'>
     <thead>
         <tr>
@@ -71,21 +71,21 @@
                         <td>
                             <div class="scroll xsmall">
                                 {% for row in data['curPlayers'] %}
-                                    <a href="/bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
+                                    <a href="bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
                                 {% endfor %}
                             </div>
                         </td>
                         <td>
                             <div class="scroll xsmall">
                                 {% for row in data['dayPlayers'] %}
-                                    <a href="/bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
+                                    <a href="bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
                                 {% endfor %}
                             </div>
                         </td>
                         <td>
                             <div class="scroll xsmall">
                                 {% for row in data['weekPlayers'] %}
-                                    <a href="/bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
+                                    <a href="bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
                                 {% endfor %}
                             </div>
                         </td>
@@ -143,7 +143,7 @@
                     </tr>
                     <tr class='tRow tRowLast'>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['curBestPlayerRatio']['PlayerName']|url_encode()}}">{{ data['curBestPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['curBestPlayerRatio']['PlayerName']|url_encode()}}">{{ data['curBestPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['curBestPlayerRatio']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['curBestPlayerRatio']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['curBestPlayerRatio']['Losses']| default(0)}}</span><br />
@@ -151,7 +151,7 @@
                             Ratio: <span class="data">{{ data['curBestPlayerRatio']['Ratio']| default(0)| number_format(2)}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['dayBestPlayerRatio']['PlayerName']|url_encode()}}">{{ data['dayBestPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['dayBestPlayerRatio']['PlayerName']|url_encode()}}">{{ data['dayBestPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['dayBestPlayerRatio']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['dayBestPlayerRatio']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['dayBestPlayerRatio']['Losses']| default(0)}}</span><br />
@@ -160,7 +160,7 @@
                             Timestamp: <span class="data">{{ data['dayBestPlayerRatio']['Timestamp']| default('--')}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['weekBestPlayerRatio']['PlayerName']|url_encode()}}">{{ data['weekBestPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['weekBestPlayerRatio']['PlayerName']|url_encode()}}">{{ data['weekBestPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['weekBestPlayerRatio']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['weekBestPlayerRatio']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['weekBestPlayerRatio']['Losses']| default(0)}}</span><br />
@@ -176,7 +176,7 @@
                     </tr>
                     <tr class='tRow tRowLast'>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['curWorstPlayerRatio']['PlayerName']|url_encode()}}">{{ data['curWorstPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['curWorstPlayerRatio']['PlayerName']|url_encode()}}">{{ data['curWorstPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['curWorstPlayerRatio']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['curWorstPlayerRatio']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['curWorstPlayerRatio']['Losses']| default(0)}}</span><br />
@@ -184,7 +184,7 @@
                             Ratio: <span class="data">{{ data['curWorstPlayerRatio']['Ratio']| default(0)| number_format(2)}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['dayWorstPlayerRatio']['PlayerName']|url_encode()}}">{{ data['dayWorstPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['dayWorstPlayerRatio']['PlayerName']|url_encode()}}">{{ data['dayWorstPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['dayWorstPlayerRatio']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['dayWorstPlayerRatio']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['dayWorstPlayerRatio']['Losses']| default(0)}}</span><br />
@@ -193,7 +193,7 @@
                             Timestamp: <span class="data">{{ data['dayWorstPlayerRatio']['Timestamp']| default('--')}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['weekWorstPlayerRatio']['PlayerName']|url_encode()}}">{{ data['weekWorstPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['weekWorstPlayerRatio']['PlayerName']|url_encode()}}">{{ data['weekWorstPlayerRatio']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['weekWorstPlayerRatio']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['weekWorstPlayerRatio']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['weekWorstPlayerRatio']['Losses']| default(0)}}</span><br />
@@ -209,14 +209,14 @@
                     </tr>
                     <tr class='tRow tRowLast'>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['curMostWins']['PlayerName']|url_encode()}}">{{ data['curMostWins']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['curMostWins']['PlayerName']|url_encode()}}">{{ data['curMostWins']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['curMostWins']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['curMostWins']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['curMostWins']['Losses']| default(0)}}</span><br />
                             TK: <span class="data">{{ data['curMostWins']['Teamkills']| default(0)}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['dayMostWins']['PlayerName']|url_encode()}}">{{ data['dayMostWins']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['dayMostWins']['PlayerName']|url_encode()}}">{{ data['dayMostWins']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['dayMostWins']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['dayMostWins']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['dayMostWins']['Losses']| default(0)}}</span><br />
@@ -224,7 +224,7 @@
                             Timestamp: <span class="data">{{ data['dayMostWins']['Timestamp']| default('--')}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['weekMostWins']['PlayerName']|url_encode()}}">{{ data['weekMostWins']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['weekMostWins']['PlayerName']|url_encode()}}">{{ data['weekMostWins']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['weekMostWins']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['weekMostWins']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['weekMostWins']['Losses']| default(0)}}</span><br />
@@ -239,14 +239,14 @@
                     </tr>
                     <tr class='tRow tRowLast'>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['curTK']['PlayerName']|url_encode()}}">{{ data['curTK']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['curTK']['PlayerName']|url_encode()}}">{{ data['curTK']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['curTK']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['curTK']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['curTK']['Losses']| default(0)}}</span><br />
                             TK: <span class="data">{{ data['curTK']['Teamkills']| default(0)}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['dayTK']['PlayerName']|url_encode()}}">{{ data['dayTK']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['dayTK']['PlayerName']|url_encode()}}">{{ data['dayTK']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['dayTK']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['dayTK']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['dayTK']['Losses']| default(0)}}</span><br />
@@ -254,7 +254,7 @@
                             Timestamp: <span class="data">{{ data['dayTK']['Timestamp']| default('--')}}</span><br />
                         </td>
                         <td>
-                            <span class="dataTop norm"><a class="dataTop" href="/bzstats/player/{{data['weekTK']['PlayerName']|url_encode()}}">{{ data['weekTK']['PlayerName']| default('--')}}</a></span><br />
+                            <span class="dataTop norm"><a class="dataTop" href="bzstats/player/{{data['weekTK']['PlayerName']|url_encode()}}">{{ data['weekTK']['PlayerName']| default('--')}}</a></span><br />
                             Team: <span class="data">{{ data['weekTK']['Team']| default('--')}}</span><br />
                             Wins: <span class="data">{{ data['weekTK']['Wins']| default(0)}}</span><br />
                             Losses: <span class="data">{{ data['weekTK']['Losses']| default(0)}}</span><br />
@@ -268,15 +268,15 @@
     </tbody>
 </table>
 {% endblock %}
-    
-    
+
+
 {% block listArea %}
 <div class="listAreaWrapper">
     <div>
         <div class="listAreaTitle">All Players That Have Played Here <span class="small info">(total: {{ data['allPlayers']|length }})</span></div>
         <div class="dataScroll">
             {% for row in data['allPlayers'] %}
-                <a href="/bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
+                <a href="bzstats/player/{{row['PlayerName']|url_encode()}}">{{ row.PlayerName }}</a><br />
             {% endfor %}
         </div>
     </div>

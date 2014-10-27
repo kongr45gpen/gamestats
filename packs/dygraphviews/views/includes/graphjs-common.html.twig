@@ -1,29 +1,29 @@
 <!--[if IE]><script src="/js/excanvas.compiled.js"></script><![endif]-->
-<script type="text/javascript" src="/js/dygraph-combined.js"></script>   
+<script type="text/javascript" src="js/dygraph-combined.js"></script>
 <script type="text/javascript">
     //get current and old date's
     var dStart = new Date();
     var dEnd = new Date();
-    
+
     //convert time to GMT
     //setToGMT(dStart);
     //setToGMT(dEnd);
-    
+
     var dateAge=1;
     //var tz=dStart.getTimezoneOffset();
     //var hourAge=168;
     var hourAge=24;
-    
+
     //setOldMonth(dStart);
     setOldHour(dStart);
-    
+
     var dStartStr = getSimpleDateString(dStart);
     var dEndStr = getSimpleDateString(dEnd);
-    
+
     function genURL(baseDataUrl) {
         return baseDataUrl+"/"+dStartStr+"/"+dEndStr+"/GMT";
     }
-    
+
     function setActiveDateLink(id, dateLink) {
         all = document.getElementsByName(dateLink);
         for(var i=0;i<all.length;i++){
@@ -34,7 +34,7 @@
         cur.style.color = "red";
         cur.className+="selected";
     }
-        
+
     function updateGraph(gid, dataURL) {
         gid.updateOptions( { 'file': dataURL } );
     }
@@ -51,13 +51,13 @@
             setMonth(getMonth()-dateAge);
         }
     }
-    
+
     function setOldHour(objDate) {
         with (objDate) {
             setHours(getHours()-hourAge);
         }
     }
-    
+
     function zeropad(str) {
         if (str.length < 2) {
             return "0"+str;
@@ -81,7 +81,7 @@
         document.getElementById(start).innerHTML=dStart.toUTCString();
         document.getElementById(end).innerHTML=dEnd.toUTCString();
     }
-            
+
     function setDateRange(interval, gid, strGid, baseURL) {
         gidStart = strGid+"DateStart";
         gidEnd = strGid+"DateEnd";
